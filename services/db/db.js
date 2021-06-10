@@ -9,14 +9,23 @@ const configuration = {
 }
 
 //Funcion para hacer cualquier consulta a DB
-const query =  (query) =>{
+const query =  (query, params) =>{
+
     const connection = mysql.createConnection(configuration);
     connection.connect();
     return new Promise((resolve,reject)=>{
-        connection.query(query,(err,rows,fields)=>{
-            connection.end();
-            return err ? reject(err): resolve(rows);
-        });
+        if(params){
+            connection.query(query,params,(err,rows,fields)=>{
+                connection.end();
+                return err ? reject(err): resolve(rows);
+            });
+        }
+        else{
+            connection.query(query,(err,rows,fields)=>{
+                connection.end();
+                return err ? reject(err): resolve(rows);
+            });
+        }
     })
 }
 

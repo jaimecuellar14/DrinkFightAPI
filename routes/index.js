@@ -28,4 +28,14 @@ router.get('/users', async function(req,res,next){
   res.send(result);
 })
 
+router.post('/login', async (req,res)  => {
+  let email = req.body.email;
+  let password = req.body.password;
+  let query = "SELECT * FROM users WHERE email=? AND password=?";
+  let result = await db.query(query,[email,password]);
+  console.log(result);
+  res.send(result);
+
+})
+
 module.exports = router;
