@@ -16,7 +16,7 @@ router.get('/users', async function(req,res,next){
     password:""
 });
   connection.connect();
-  
+
   connection.query("SELECT * FROM users as solution",(err,rows,fields)=>{
     if(err) throw err;
     //console.log(`The result of the query is ${rows[0]}`);
@@ -37,5 +37,9 @@ router.post('/login', async (req,res)  => {
   res.send(result);
 
 })
+
+router.get('/home', function(req, res, next){
+  res.send('Home testing routing has passed');
+});
 
 module.exports = router;
